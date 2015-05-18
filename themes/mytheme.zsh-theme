@@ -66,51 +66,51 @@ prompt_bar_right="[%{%F{magenta}%}%d%{%f%k%b%}]"
 ### %#: 一般ユーザなら「%」、rootユーザなら「#」になる。
 #prompt_left="-[%h]%(1j,(%j),)%{%B%}%#%{%b%} "
 
-prompt_update() {
-
-	setopt prompt_subst
-
-	echo $[RANDOM % 6] > /dev/null
-
-	#prompt_left="%{%F$(fg256 $[RANDOM % 6] $[RANDOM % 6] $[RANDOM % 6])%}-[%h]%(1j,(%j),)%{%B%}%#%{%b%}%{%f%} "
-	#prompt_left="%{%F$(fg256 $[RANDOM % 5] $[RANDOM % 5] $[RANDOM % 5])%}-[%h]%(1j,(%j),)%{%B%}%#%{%b%}%{%f%} "
-	#PROMPT='${prompt_bar_left}${prompt_bar_right}'$'\n''${prompt_left}%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
-	#prompt_left="%{%F$(fg256 $[RANDOM % 5] $[RANDOM % 5] $[RANDOM % 5])%}-[%h]%(1j,(%j),)%#%{%f%} "
-	prompt_left="-[%h]%(1j,(%j),)%{%f%} "
-	#prompt_right=printf "%${COLUMNS}s\n" "${prompt_bar_left}${prompt_bar_right}"
-	right_chars="-${prompt_bar_right}${prompt_bar_left}"
-	echo "$right_chars"
-	prompt_right=$(printf "%${COLUMNS}s\n" "$right_chars")
-	echo "$prompt_right"
-	echo "$COLUMNS"
-	line=$(count_prompt_chars "$prompt_right")
-	echo "$line"
-	left_chars=`expr $COLUMNS - 1 - ${line} - 1`
-	left_chars=`expr $line - $COLUMNS`
-	echo "$left_chars"
-	left_space=""
-	for k in `seq 1 "$left_chars"`
-	do
-    	left_space="$left_space "
-	done
-	prompt_right=$(printf "%${COLUMNS}s\n" "${left_space}${right_chars}")
-	line=$(count_prompt_chars "$prompt_right")
-	echo "$line"
-	#PROMPT='${prompt_bar_left}${prompt_bar_right}'$'\n''${prompt_left}%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{%b%}%{$fg[cyan]%}%c %{$fg[blue]%}$(git_prompt_info)%{$fg[blue]%} % %{$reset_color%}'
-	PROMPT='${prompt_right}'$'\n''${prompt_left}%{$fg_bold[yellow]%}➜ %{$fg_bold[green]%}%p %{%b%}%{$fg[cyan]%}%c %{$fg[blue]%}$(git_prompt_info)%{$fg[blue]%}% %{$reset_color%}%# '
-
-	ZSH_THEME_GIT_PROMPT_PREFIX="git:(%{$fg[green]%}"
-	ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
-	ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg_bold[red]%}✗ %{$reset_color%}"
-	ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
-
-	ZSH_THEME_GIT_PROMPT_UNTRACKED="%%{$fg[blue]%}) {$fg[cyan]%} ✭%{$reset_color%}" # ⓣ
-	ZSH_THEME_GIT_PROMPT_ADDED="%%{$fg[blue]%}) {$fg[cyan]%} ✚%{$reset_color%}" # ⓐ ⑃
-	ZSH_THEME_GIT_PROMPT_MODIFIED="%%{$fg[blue]%}) {$fg[yellow]%} ⚡%{$reset_color%}"  # ⓜ ⑁
-	ZSH_THEME_GIT_PROMPT_DELETED="%%{$fg[blue]%}) {$fg[red]%} ✖%{$reset_color%}" # ⓧ ⑂
-	ZSH_THEME_GIT_PROMPT_RENAMED="%%{$fg[blue]%}) {$fg[blue]%} ➜%{$reset_color%}" # ⓡ ⑄
-	ZSH_THEME_GIT_PROMPT_UNMERGED="%%{$fg[blue]%}) {$fg[magenta]%} ♒%{$reset_color%}" # ⓤ ⑊
-}
+#prompt_update() {
+#
+#	setopt prompt_subst
+#
+#	echo $[RANDOM % 6] > /dev/null
+#
+#	#prompt_left="%{%F$(fg256 $[RANDOM % 6] $[RANDOM % 6] $[RANDOM % 6])%}-[%h]%(1j,(%j),)%{%B%}%#%{%b%}%{%f%} "
+#	#prompt_left="%{%F$(fg256 $[RANDOM % 5] $[RANDOM % 5] $[RANDOM % 5])%}-[%h]%(1j,(%j),)%{%B%}%#%{%b%}%{%f%} "
+#	#PROMPT='${prompt_bar_left}${prompt_bar_right}'$'\n''${prompt_left}%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{$fg[cyan]%}%c %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+#	#prompt_left="%{%F$(fg256 $[RANDOM % 5] $[RANDOM % 5] $[RANDOM % 5])%}-[%h]%(1j,(%j),)%#%{%f%} "
+#	prompt_left="-[%h]%(1j,(%j),)%{%f%} "
+#	#prompt_right=printf "%${COLUMNS}s\n" "${prompt_bar_left}${prompt_bar_right}"
+#	right_chars="-${prompt_bar_right}${prompt_bar_left}"
+#	echo "$right_chars"
+#	prompt_right=$(printf "%${COLUMNS}s\n" "$right_chars")
+#	echo "$prompt_right"
+#	echo "$COLUMNS"
+#	line=$(count_prompt_chars "$prompt_right")
+#	echo "$line"
+#	left_chars=`expr $COLUMNS - 1 - ${line} - 1`
+#	left_chars=`expr $line - $COLUMNS`
+#	echo "$left_chars"
+#	left_space=""
+#	for k in `seq 1 "$left_chars"`
+#	do
+#    	left_space="$left_space "
+#	done
+#	prompt_right=$(printf "%${COLUMNS}s\n" "${left_space}${right_chars}")
+#	line=$(count_prompt_chars "$prompt_right")
+#	echo "$line"
+#	#PROMPT='${prompt_bar_left}${prompt_bar_right}'$'\n''${prompt_left}%{$fg_bold[red]%}➜ %{$fg_bold[green]%}%p %{%b%}%{$fg[cyan]%}%c %{$fg[blue]%}$(git_prompt_info)%{$fg[blue]%} % %{$reset_color%}'
+#	PROMPT='${prompt_right}'$'\n''${prompt_left}%{$fg_bold[yellow]%}➜ %{$fg_bold[green]%}%p %{%b%}%{$fg[cyan]%}%c %{$fg[blue]%}$(git_prompt_info)%{$fg[blue]%}% %{$reset_color%}%# '
+#
+#	ZSH_THEME_GIT_PROMPT_PREFIX="git:(%{$fg[green]%}"
+#	ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
+#	ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[blue]%}) %{$fg_bold[red]%}✗ %{$reset_color%}"
+#	ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg[blue]%})"
+#
+#	ZSH_THEME_GIT_PROMPT_UNTRACKED="%%{$fg[blue]%}) {$fg[cyan]%} ✭%{$reset_color%}" # ⓣ
+#	ZSH_THEME_GIT_PROMPT_ADDED="%%{$fg[blue]%}) {$fg[cyan]%} ✚%{$reset_color%}" # ⓐ ⑃
+#	ZSH_THEME_GIT_PROMPT_MODIFIED="%%{$fg[blue]%}) {$fg[yellow]%} ⚡%{$reset_color%}"  # ⓜ ⑁
+#	ZSH_THEME_GIT_PROMPT_DELETED="%%{$fg[blue]%}) {$fg[red]%} ✖%{$reset_color%}" # ⓧ ⑂
+#	ZSH_THEME_GIT_PROMPT_RENAMED="%%{$fg[blue]%}) {$fg[blue]%} ➜%{$reset_color%}" # ⓡ ⑄
+#	ZSH_THEME_GIT_PROMPT_UNMERGED="%%{$fg[blue]%}) {$fg[magenta]%} ♒%{$reset_color%}" # ⓤ ⑊
+#}
 
 function count_prompt_chars (){
 	# @see https://twitter.com/satoh_fumiyasu/status/519386124020482049
