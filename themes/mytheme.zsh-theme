@@ -135,6 +135,8 @@ ZSH_THEME_GIT_PROMPT_UNMERGED="%%{$fg[blue]%}) {$fg[magenta]%}♒ %{$reset_color
 
 # この行は現在のパスを表示する設定です。ブランチを表示して色をつける設定とは関係ありません
 PROMPT="%{${fg[blue]}%}[%~]%{${reset_color}%}"
+#PROMPT='${prompt_left}%{$fg_bold[yellow]%}➜ %{$fg_bold[green]%}%p %{%b%}%{$fg[cyan]%}%c %{$fg[blue]%}$(git_prompt_info)%{$fg[blue]%}% %{$reset_color%}%# '
+#PROMPT='${prompt_left}%{$fg_bold[yellow]%}➜ %{$reset_color%}%n%{$fg_bold[yellow]%}@%{$reset_color%}%m %{$fg_bold[green]%}%p %{%b%}%{$fg[cyan]%}%c %{$fg[blue]%}$(git_prompt_info)%{$fg[blue]%}% %{$reset_color%}%# '
 PROMPT='${prompt_left}%{$fg_bold[yellow]%}➜ %{$fg_bold[green]%}%p %{%b%}%{$fg[cyan]%}%c %{$fg[blue]%}$(git_prompt_info)%{$fg[blue]%}% %{$reset_color%}%# '
 
 autoload -Uz vcs_info
@@ -145,4 +147,4 @@ zstyle ':vcs_info:git:*' unstagedstr "%F{red}+"
 zstyle ':vcs_info:*' formats "%F{green}%c%u[%b]%f"
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
 precmd () { vcs_info }
-RPROMPT=$RPROMPT'${vcs_info_msg_0_}%{${fg[blue]}%}[%~]%{$reset_color%}%'
+RPROMPT=$RPROMPT'${vcs_info_msg_0_}%{${fg[blue]}%}[%~]%{$reset_color%}% %{${fg[white]}%}[%*]%{$reset_color%}%'
